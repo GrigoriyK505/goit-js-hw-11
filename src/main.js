@@ -7,6 +7,8 @@ import {
   renderGallery,
   showLoader,
   hideLoader,
+  showLoadingToast,
+  hideLoadingToast,
   showError,
   showWarning,
 } from "./js/render-functions.js";
@@ -25,10 +27,12 @@ form.addEventListener("submit", async (e) => {
 
   clearGallery();
   showLoader();
+  showLoadingToast();
 
   try {
     const data = await fetchImages(query);
     hideLoader();
+    hideLoadingToast();
 
     if (!data.hits.length) {
       showWarning("Sorry, there are no images matching your search query. Please try again!");
@@ -38,6 +42,7 @@ form.addEventListener("submit", async (e) => {
     renderGallery(data.hits);
   } catch (error) {
     hideLoader();
+    hideLoadingToast();
     showError("Something went wrong. Please try again later!");
   }
 });

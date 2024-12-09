@@ -35,6 +35,22 @@ export function hideLoader() {
   loader.style.display = "none";
 }
 
+export function showLoadingToast() {
+  iziToast.info({
+    id: "loading-toast",
+    title: "Loading",
+    message: "Fetching images, please wait...",
+    timeout: false, // Сповіщення не зникає автоматично
+    close: false, // Забороняємо користувачу вручну закривати сповіщення
+    position: "topRight",
+  });
+}
+
+export function hideLoadingToast() {
+  iziToast.hide({}, document.querySelector(".iziToast#loading-toast"));
+}
+
+
 /**
  * @param {Array} images
  */
